@@ -4,7 +4,7 @@ import { getUser } from '../../services/authService';
 import './App.css';
 import NavBar from '../../components/NavBar/NavBar';
 import HomePage from '../HomePage/HomePage';
-import PostListPage from '../PostListPage/PostListPage';
+import JobBoardPage from '../JobBoardPage/JobBoardPage';
 import NewPostPage from '../NewPostPage/NewPostPage';
 import SignUpPage from '../SignUpPage/SignUpPage';
 import LogInPage from '../LogInPage/LogInPage';
@@ -19,7 +19,7 @@ function App() {
         {user ? (
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/posts" element={<PostListPage />} />
+            <Route path="/board" element={<JobBoardPage />} />
             <Route path="/posts/new" element={<NewPostPage />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>

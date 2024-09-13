@@ -4,7 +4,7 @@
   font-weight: 400;
 
   color: #1a1a1a;
-  background-color: #f5b98c;
+  background-color: beige;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -32,14 +32,14 @@ button {
   font-size: 2vmin;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  /* background-color: #1a1a1a; */
   color: whitesmoke;
   cursor: pointer;
 }
 button:hover {
   background-color: white;
-  color: #1a1a1a;
-  border-color: #1a1a1a;
+  /* color: #1a1a1a; */
+  /* border-color: #1a1a1a; */
 }
 button:disabled {
   background-color: grey;
@@ -54,7 +54,7 @@ a {
 }
 
 a:hover {
-  background-color: #1a1a1a;
+  /* background-color: #1a1a1a; */
   color: whitesmoke;
 }
 
