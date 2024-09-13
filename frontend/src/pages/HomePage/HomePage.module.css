@@ -1,0 +1,42 @@
+.title {
+  font-size: 12vmin;
+  font-family: 'CrawModern';
+  color: #0b0909;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 4vmin;
+  font-family: 'CrawModern';
+  color: #2d2a2a;
+  margin: 1%;
+}
+
+p {
+  font-size: 2vmin;
+  color: #1a1a1a;
+  margin: 1%;
+}
+
+.button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+@font-face {
+  font-family: 'CrawModern';
+  src: url(../../../public/fonts/OPTICrawModern.otf);
+}
+
+.CrawModern {
+  font-family: 'CrawModern';
+}
