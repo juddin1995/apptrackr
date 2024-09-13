@@ -1,3 +1,13 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body, html {
+  overflow-x: hidden;
+}
+
 .container {
   font-family: 'Roboto', sans-serif;
   margin: 0;
@@ -19,7 +29,8 @@
 }
 
 .heroContent {
-  max-width: 800px;
+  max-width: 100%;
+  display: block;
 }
 
 .title {

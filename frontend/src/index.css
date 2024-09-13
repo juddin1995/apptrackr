@@ -4,7 +4,7 @@
   font-weight: 400;
 
   color: #1a1a1a;
-  background-color: beige;
+  background: black;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -23,6 +23,7 @@ body {
 
 h1, h2 {
   text-align: center;
+  color: whitesmoke;
 }
 
 button {
@@ -32,14 +33,12 @@ button {
   font-size: 2vmin;
   font-weight: 500;
   font-family: inherit;
-  /* background-color: #1a1a1a; */
-  color: whitesmoke;
+  color: black;
   cursor: pointer;
 }
 button:hover {
   background-color: white;
-  /* color: #1a1a1a; */
-  /* border-color: #1a1a1a; */
+  color: #1a1a1a;
 }
 button:disabled {
   background-color: grey;
@@ -54,7 +53,6 @@ a {
 }
 
 a:hover {
-  /* background-color: #1a1a1a; */
   color: whitesmoke;
 }
 
@@ -80,6 +78,7 @@ form > button:last-child {
 label {
   font-size: 2vmin;
   font-weight: bold;
+  color: whitesmoke;
 }
 
 h2 {

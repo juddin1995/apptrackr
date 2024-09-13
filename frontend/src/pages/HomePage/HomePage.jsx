@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './HomePage.module.css';
 import { Link } from 'react-router-dom';
 
@@ -16,13 +15,13 @@ export default function HomePage({ user }) {
           <img className={styles.heroImage} src="/path/to/your-image.jpg" alt="AppTrackr Hero" />
           {user ? (
             <div className={styles.buttonGroup}>
-              <Link to="/login" className={styles.ctaButton}>Log In</Link>
-              <Link to="/signup" className={styles.ctaButton}>Sign Up</Link>
+              <Link to='/board' className={styles.ctaButton}>Go to Job Board</Link>
+              <Link to='/board/new' className={styles.ctaButton}>Add a Job Application</Link>
             </div>
           ) : (
             <div className={styles.buttonGroup}>
-              <Link to='/board' className={styles.ctaButton}>Go to Job Board</Link>
-              <Link to='/signup' className={styles.ctaButton}>Sign Up</Link>
+              <Link to="/login" className={styles.ctaButton}>Log In</Link>
+              <Link to="/signup" className={styles.ctaButton}>Sign Up</Link>
             </div>
           )}
         </div>

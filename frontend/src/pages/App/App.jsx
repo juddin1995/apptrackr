@@ -18,14 +18,14 @@ function App() {
       <section id="main-section">
         {user ? (
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<HomePage user={user}/>} />
             <Route path="/board" element={<JobBoardPage />} />
-            <Route path="/posts/new" element={<NewPostPage />} />
+            <Route path="/board/new" element={<NewPostPage />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         ) : (
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<HomePage user={user} />} />
             <Route path="/login" element={<LogInPage setUser={setUser} />} />
             <Route path="/signup" element={<SignUpPage setUser={setUser} />} />
             <Route path="*" element={<Navigate to="/" />} />
