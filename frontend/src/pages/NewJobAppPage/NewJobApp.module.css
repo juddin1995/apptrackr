@@ -1,0 +1,63 @@
+.container {
+  max-width: 600px;
+  margin: 2vmin auto;
+  padding: 2rem;
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  color: #f5f5f5;
+}
+
+.container h1 {
+  text-align: center;
+  font-size: 3vmin;
+  color: #00c6ff;
+  margin-bottom: 2vmin;
+}
+
+/* Add form group to ensure label is above each input */
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2vmin;
+}
+
+label {
+  font-size: 2vmin;
+  font-weight: bold;
+  color: whitesmoke;
+  margin-bottom: 0.5vmin;
+}
+
+input, textarea, select {
+  padding: 0.7vmin;
+  font-size: 2vmin;
+  border: 0.3vmin solid #1a1a1a;
+  border-radius: 0.5vmin;
+  background-color: #333;
+  color: #fff;
+}
+
+form button {
+  padding: 1rem;
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-size: 2vmin;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 2vmin;
+}
+
+form button:hover {
+  background-color: #00060e;
+}
+
+form {
+  display: grid;
+  gap: 1.2vmin;
+  padding: 4vmin;
+  border: 0.5vmin solid #1a1a1a;
+  border-radius: 1vmin;
+}

@@ -5,7 +5,7 @@ import './App.css';
 import NavBar from '../../components/NavBar/NavBar';
 import HomePage from '../HomePage/HomePage';
 import JobBoardPage from '../JobBoardPage/JobBoardPage';
-import NewPostPage from '../NewPostPage/NewPostPage';
+import NewPostPage from '../NewJobAppPage/NewJobAppPage';
 import SignUpPage from '../SignUpPage/SignUpPage';
 import LogInPage from '../LogInPage/LogInPage';
 
