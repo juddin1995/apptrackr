@@ -1,0 +1,49 @@
+.board {
+  display: flex;
+  overflow-x: auto;
+  background: #000; /* Matches the background of the page */
+  padding: 1rem;
+}
+
+.column {
+  background: linear-gradient(135deg, #1e1e1e, #2a2a2a); /* Subtle gradient for depth */
+  border-radius: 8px; /* Slightly more rounded corners for a modern look */
+  margin: 0 0.5rem;
+  padding: 1rem;
+  min-width: 29vmin;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add depth with shadow */
+}
+
+.columnTitle {
+  color: #00c6ff; /* Bright blue to stand out */
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.columnContent {
+  min-height: 100px;
+}
+
+.card {
+  background: #1f1f3d; /* Darker blue to stand out against the column background */
+  color: #fff;
+  border-radius: 6px; /* Slightly rounded corners */
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+}
+
+.cardTitle {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.jobDescription {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.dateText {
+  font-size: 0.8rem;
+  color: #b0b0b0; /* Slightly lighter color for contrast */
+}

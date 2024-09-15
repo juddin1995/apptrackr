@@ -1,20 +1,39 @@
 .NavBar {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  padding: 2vmin;
-  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  padding: 1.5vmin 3vmin;
+  background: linear-gradient(135deg, rgba(2, 2, 34, 1) 0%, rgba(0, 11, 45, 1) 100%);
   color: white;
-}
-
-.NavBar span {
-  color: rgb(239, 231, 237);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .NavBar a {
-  color: white;
+  color: #f5f5f5;
   text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  transition: background 0.3s;
+  font-size: 1.2vmin;
+  font-weight: 500;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.NavBar a:hover {
+  color: #00c6ff;
+  transform: scale(1.05);
+}
+
+.NavBar .logo {
+  font-size: 2.5vmin;
+  font-family: 'CrawModern', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.NavBar .menu {
+  display: flex;
+  gap: 2vmin;
+}
+
+.NavBar .menu-item {
+  font-size: 1.2vmin;
 }

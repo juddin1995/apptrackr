@@ -7,8 +7,6 @@ const router = express.Router();
 
 // ========= Protected Routes =========
 
-router.use(verifyToken);
-
 module.exports = {
   index,
   // show,

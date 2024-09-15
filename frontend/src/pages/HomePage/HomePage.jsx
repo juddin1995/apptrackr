@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 export default function HomePage({ user }) {
   return (
     <div className={styles.container}>
-      {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <h1 className={styles.title}>Welcome to AppTrackr</h1>
@@ -27,7 +26,6 @@ export default function HomePage({ user }) {
         </div>
       </section>
 
-      {/* Features Section */}
       <section className={styles.features}>
         <h2 className={styles.featuresTitle}>Why Choose AppTrackr?</h2>
         <div className={styles.featureList}>
@@ -50,7 +48,6 @@ export default function HomePage({ user }) {
         </div>
       </section>
 
-      {/* Testimonials Section */}
       <section className={styles.testimonials}>
         <h2 className={styles.testimonialsTitle}>What Our Users Say</h2>
         <div className={styles.testimonialList}>
@@ -69,9 +66,8 @@ export default function HomePage({ user }) {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className={styles.footer}>
-        <p>Jomir &copy; 2024</p>
+        <p>Jomir Uddin &copy; 2024</p>
       </footer>
     </div>
   );
