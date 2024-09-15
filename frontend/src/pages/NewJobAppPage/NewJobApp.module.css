@@ -15,7 +15,6 @@
   margin-bottom: 2vmin;
 }
 
-/* Add form group to ensure label is above each input */
 .formGroup {
   display: flex;
   flex-direction: column;
