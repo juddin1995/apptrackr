@@ -1,9 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import styles from './JobBoardPage.module.css';
+import * as jobAppService from '../../services/jobAppService';
 
-export default function JobBoardPage({ columns, setColumns, newJob }) {
+export default function JobBoardPage({ columns, setColumns, job }) {
   const [localColumns, setLocalColumns] = useState(columns);
+
+  useEffect(() => {
+    async function fetchJobApplications() {
+      try {
+        const jobApps = await jobAppService.getJobApps();
+        console.log(jobApps);
+        const updatedColumns = { ...localColumns };
+
+        jobApps.forEach(job => {
+          const status = job.status;
+          if (updatedColumns[status]) {
+            updatedColumns[status].items.push(job);
+          }
+        });
+
+        setLocalColumns(updatedColumns);
+        setColumns(updatedColumns);
+      } catch (error) {
+        console.error('Failed to fetch job applications:', error);
+      }
+    }
+
+    fetchJobApplications();
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('columns', JSON.stringify(localColumns));
@@ -13,18 +38,17 @@ export default function JobBoardPage({ columns, setColumns, newJob }) {
     setLocalColumns(columns);
   }, [columns]);
 
-  // Add job to the relevant column based on the job status
   useEffect(() => {
-    if (newJob) {
+    if (job) {
       const updatedColumns = { ...localColumns };
-      const status = newJob.status;
+      const status = job.status;
       if (updatedColumns[status]) {
-        updatedColumns[status].items.push(newJob);
+        updatedColumns[status].items.push(job);
         setLocalColumns(updatedColumns);
         setColumns(updatedColumns);
       }
     }
-  }, [newJob, localColumns, setColumns]);
+  }, [job, localColumns, setColumns]);
 
   const onDragEnd = (result) => {
     const { source, destination } = result;
@@ -37,7 +61,7 @@ export default function JobBoardPage({ columns, setColumns, newJob }) {
     const destItems = [...destColumn.items];
     const [removed] = sourceItems.splice(source.index, 1);
     destItems.splice(destination.index, 0, removed);
-    
+
     const updatedColumns = {
       ...localColumns,
       [source.droppableId]: {
@@ -68,7 +92,7 @@ export default function JobBoardPage({ columns, setColumns, newJob }) {
                 <h2 className={styles.columnTitle}>{column.name}</h2>
                 <div className={styles.columnContent}>
                   {column.items.map((item, index) => (
-                    <Draggable key={item.id} draggableId={item.id} index={index}>
+                    <Draggable key={item._id} draggableId={item._id} index={index}>
                       {(provided, snapshot) => (
                         <div
                           ref={provided.innerRef}
@@ -78,9 +102,9 @@ export default function JobBoardPage({ columns, setColumns, newJob }) {
                         >
                           <h4 className={styles.cardTitle}>{item.company_name} - {item.job_title}</h4>
                           <p className={styles.jobDescription}>{item.job_description}</p>
-                          <p><strong>Notes:</strong> {item.notes}</p>
-                          <p className={styles.dateText}><strong>Created At:</strong> {item.created_at}</p>
-                          <p className={styles.dateText}><strong>Updated At:</strong> {item.updated_at}</p>
+                          <p><strong>Notes:</strong> {item.notes.map(note => <div key={note._id}>{note.content}</div>)}</p>
+                          <p className={styles.dateText}><strong>Created At:</strong> {new Date(item.created_at).toLocaleDateString()}</p>
+                          <p className={styles.dateText}><strong>Updated At:</strong> {new Date(item.updated_at).toLocaleDateString()}</p>
                         </div>
                       )}
                     </Draggable>

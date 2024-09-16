@@ -30,7 +30,7 @@ async function create(req, res) {
 
 async function index(req, res) {
   try {
-    const jobApps = await JobApp.find({ user_id: req.user._id });
+    const jobApps = await JobApp.find({ user: req.user._id });
     res.json(jobApps);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch job applications' });

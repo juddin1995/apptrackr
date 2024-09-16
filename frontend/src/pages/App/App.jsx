@@ -48,7 +48,7 @@ function App() {
     rejected: { name: "Rejected", items: [] }
   });
 
-  const [newJob, setNewJob] = useState(null);
+  const [job, setJob] = useState(null);
 
   const handleNewJob = (job) => {
     setNewJob(job);
@@ -65,7 +65,7 @@ function App() {
         {user ? (
           <Routes>
             <Route path="/" element={<HomePage user={user} />} />
-            <Route path="/board" element={<JobBoardPage columns={columns} setColumns={setColumns} newJob={newJob} />} />
+            <Route path="/board" element={<JobBoardPage columns={columns} setColumns={setColumns} job={job} />} />
             <Route path="/board/new" element={<NewJobAppPage onJobSubmit={handleNewJob} />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
