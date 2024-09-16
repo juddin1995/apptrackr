@@ -1,26 +1,19 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose');
 
-const noteSchema = new Schema({
-  job_app_id: { type: Schema.Types.ObjectId, ref: "JobApplication" },
-  note_content: { type: String, required: true },
-  created_at: { type: Date, default: Date.now },
+const noteSchema = new mongoose.Schema({
+  content: { type: String, required: true },
+  createdAt: { type: Date, default: Date.now }
 });
 
-const jobApplicationSchema = new Schema({
-  job_app_id: Object,
-  user_id: { type: Schema.Types.ObjectId, ref: "User", required: true },
-  company_name: { type: String, required: true },
-  job_title: { type: String, required: true },
-  job_description: { type: String, required: true },
-  status: {
-    type: String,
-    enum: ["wishlist", "applied", "interview", "offer", "rejected"],
-    default: "wishlist",
-  },
+const jobAppSchema = new mongoose.Schema({
+  companyName: { type: String, required: true },
+  jobTitle: { type: String, required: true },
+  jobDescription: { type: String, required: true },
+  status: { type: String, enum: ['wishlist', 'applied', 'interview', 'offer', 'rejected'], default: 'wishlist' },
   notes: [noteSchema],
-  created_at: { type: Date, default: Date.now },
-  updated_at: { type: Date, default: Date.now },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
+}, {
+  timestamps: true
 });
 
-module.exports = mongoose.model("JobApplication", jobApplicationSchema);
+module.exports = mongoose.model('JobApp', jobAppSchema);

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import styles from './JobBoardPage.module.css';
 
-export default function JobBoardPage({ columns, setColumns }) {
+export default function JobBoardPage({ columns, setColumns, newJob }) {
   const [localColumns, setLocalColumns] = useState(columns);
 
   useEffect(() => {
@@ -12,17 +12,32 @@ export default function JobBoardPage({ columns, setColumns }) {
   useEffect(() => {
     setLocalColumns(columns);
   }, [columns]);
-  
+
+  // Add job to the relevant column based on the job status
+  useEffect(() => {
+    if (newJob) {
+      const updatedColumns = { ...localColumns };
+      const status = newJob.status;
+      if (updatedColumns[status]) {
+        updatedColumns[status].items.push(newJob);
+        setLocalColumns(updatedColumns);
+        setColumns(updatedColumns);
+      }
+    }
+  }, [newJob, localColumns, setColumns]);
+
   const onDragEnd = (result) => {
     const { source, destination } = result;
     if (!destination) return;
     if (source.droppableId === destination.droppableId && source.index === destination.index) return;
+
     const sourceColumn = localColumns[source.droppableId];
     const destColumn = localColumns[destination.droppableId];
     const sourceItems = [...sourceColumn.items];
     const destItems = [...destColumn.items];
     const [removed] = sourceItems.splice(source.index, 1);
     destItems.splice(destination.index, 0, removed);
+    
     const updatedColumns = {
       ...localColumns,
       [source.droppableId]: {
@@ -34,6 +49,7 @@ export default function JobBoardPage({ columns, setColumns }) {
         items: destItems
       }
     };
+
     setLocalColumns(updatedColumns);
     setColumns(updatedColumns);
   };

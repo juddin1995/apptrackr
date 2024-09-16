@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import styles from './NewJobApp.module.css';
+import { createJobApp } from '../../services/jobAppService';
 
-export default function NewJobApp() {
+export default function NewJobApp({ setColumns }) {
   const [formData, setFormData] = useState({
-    company_name: '',
-    job_title: '',
-    job_description: '',
+    companyName: '',
+    jobTitle: '',
+    jobDescription: '',
     status: 'wishlist',
     notes: ''
   });
@@ -18,16 +19,26 @@ export default function NewJobApp() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    setFormData({
-      company_name: '',
-      job_title: '',
-      job_description: '',
-      status: 'wishlist',
-      notes: ''
-    });
+    try {
+      // Use the createJobApp function from jobAppService
+      const newJobApp = await createJobApp(formData);
+      setFormData({
+        companyName: '',
+        jobTitle: '',
+        jobDescription: '',
+        status: 'wishlist',
+        notes: ''
+      });
+      // Update the job board with the new job application
+      setColumns((prevColumns) => {
+        const updatedColumn = { ...prevColumns[newJobApp.status], items: [...prevColumns[newJobApp.status].items, newJobApp] };
+        return { ...prevColumns, [newJobApp.status]: updatedColumn };
+      });
+    } catch (error) {
+      console.error('Failed to create job application:', error);
+    }
   };
 
   return (
@@ -35,35 +46,35 @@ export default function NewJobApp() {
       <h1>Add New Job Application</h1>
       <form onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
-          <label htmlFor="company_name">Company Name</label>
+          <label htmlFor="companyName">Company Name</label>
           <input
             type="text"
-            id="company_name"
-            name="company_name"
-            value={formData.company_name}
+            id="companyName"
+            name="companyName"
+            value={formData.companyName}
             onChange={handleChange}
             required
           />
         </div>
 
         <div className={styles.formGroup}>
-          <label htmlFor="job_title">Job Title</label>
+          <label htmlFor="jobTitle">Job Title</label>
           <input
             type="text"
-            id="job_title"
-            name="job_title"
-            value={formData.job_title}
+            id="jobTitle"
+            name="jobTitle"
+            value={formData.jobTitle}
             onChange={handleChange}
             required
           />
         </div>
 
         <div className={styles.formGroup}>
-          <label htmlFor="job_description">Job Description</label>
+          <label htmlFor="jobDescription">Job Description</label>
           <textarea
-            id="job_description"
-            name="job_description"
-            value={formData.job_description}
+            id="jobDescription"
+            name="jobDescription"
+            value={formData.jobDescription}
             onChange={handleChange}
             required
           />
