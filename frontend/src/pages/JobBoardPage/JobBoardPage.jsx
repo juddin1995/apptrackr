@@ -59,8 +59,15 @@ export default function JobBoardPage({ columns, setColumns, job }) {
     const destColumn = localColumns[destination.droppableId];
     const sourceItems = [...sourceColumn.items];
     const destItems = [...destColumn.items];
+    debugger;
     const [removed] = sourceItems.splice(source.index, 1);
-    destItems.splice(destination.index, 0, removed);
+    if (source.droppableId === destination.droppableId) { 
+      const save = destItems[destination.index];
+      destItems[destination.index] = removed;
+      destItems[source.index] = save;
+    } else {
+      destItems.splice(destination.index, 0, removed);
+    }
 
     const updatedColumns = {
       ...localColumns,
@@ -102,7 +109,7 @@ export default function JobBoardPage({ columns, setColumns, job }) {
                         >
                           <h4 className={styles.cardTitle}>{item.company_name} - {item.job_title}</h4>
                           <p className={styles.jobDescription}>{item.job_description}</p>
-                          <p><strong>Notes:</strong> {item.notes.map(note => <div key={note._id}>{note.content}</div>)}</p>
+                          <div><strong>Notes:</strong> {item.notes.map(note => <p key={note._id}>{note.content}</p>)}</div>
                           <p className={styles.dateText}><strong>Created At:</strong> {new Date(item.created_at).toLocaleDateString()}</p>
                           <p className={styles.dateText}><strong>Updated At:</strong> {new Date(item.updated_at).toLocaleDateString()}</p>
                         </div>
