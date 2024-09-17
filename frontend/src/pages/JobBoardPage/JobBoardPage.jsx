@@ -1,17 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import styles from './JobBoardPage.module.css';
 import * as jobAppService from '../../services/jobAppService';
 
 export default function JobBoardPage({ columns, setColumns, job }) {
   const [localColumns, setLocalColumns] = useState(columns);
+  const hasFetchedData = useRef(false);
 
   useEffect(() => {
     async function fetchJobApplications() {
+      if (hasFetchedData.current) return;
+  
       try {
         const jobApps = await jobAppService.getJobApps();
         console.log(jobApps);
+  
         const updatedColumns = { ...localColumns };
+        Object.keys(updatedColumns).forEach(columnId => {
+          updatedColumns[columnId].items = [];
+        });
   
         jobApps.forEach(job => {
           const status = job.status;
@@ -22,13 +29,13 @@ export default function JobBoardPage({ columns, setColumns, job }) {
   
         setLocalColumns(updatedColumns);
         setColumns(updatedColumns);
+        hasFetchedData.current = true;
       } catch (error) {
         console.error('Failed to fetch job applications:', error);
       }
     }
     fetchJobApplications();
-  }, []);
-  
+  }, [localColumns, setColumns]);
 
   useEffect(() => {
     localStorage.setItem('columns', JSON.stringify(localColumns));
@@ -43,12 +50,14 @@ export default function JobBoardPage({ columns, setColumns, job }) {
       const updatedColumns = { ...localColumns };
       const status = job.status;
       if (updatedColumns[status]) {
+        console.log(`Adding job to status ${status}`);
         updatedColumns[status].items.push(job);
         setLocalColumns(updatedColumns);
         setColumns(updatedColumns);
       }
     }
   }, [job, localColumns, setColumns]);
+  
 
   const onDragEnd = async (result) => {
     const { source, destination } = result;
