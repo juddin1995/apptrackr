@@ -12,23 +12,23 @@ export default function JobBoardPage({ columns, setColumns, job }) {
         const jobApps = await jobAppService.getJobApps();
         console.log(jobApps);
         const updatedColumns = { ...localColumns };
-
+  
         jobApps.forEach(job => {
           const status = job.status;
           if (updatedColumns[status]) {
             updatedColumns[status].items.push(job);
           }
         });
-
+  
         setLocalColumns(updatedColumns);
         setColumns(updatedColumns);
       } catch (error) {
         console.error('Failed to fetch job applications:', error);
       }
     }
-
     fetchJobApplications();
   }, []);
+  
 
   useEffect(() => {
     localStorage.setItem('columns', JSON.stringify(localColumns));
@@ -50,7 +50,7 @@ export default function JobBoardPage({ columns, setColumns, job }) {
     }
   }, [job, localColumns, setColumns]);
 
-  const onDragEnd = (result) => {
+  const onDragEnd = async (result) => {
     const { source, destination } = result;
     if (!destination) return;
     if (source.droppableId === destination.droppableId && source.index === destination.index) return;
@@ -59,7 +59,6 @@ export default function JobBoardPage({ columns, setColumns, job }) {
     const destColumn = localColumns[destination.droppableId];
     const sourceItems = [...sourceColumn.items];
     const destItems = [...destColumn.items];
-    debugger;
     const [removed] = sourceItems.splice(source.index, 1);
     if (source.droppableId === destination.droppableId) { 
       const save = destItems[destination.index];
@@ -67,6 +66,9 @@ export default function JobBoardPage({ columns, setColumns, job }) {
       destItems[source.index] = save;
     } else {
       destItems.splice(destination.index, 0, removed);
+      const newStatus = destColumn.name.toLowerCase();
+      await jobAppService.updateJobStatus(removed._id, newStatus);
+      removed.status = newStatus;
     }
 
     const updatedColumns = {
@@ -107,11 +109,11 @@ export default function JobBoardPage({ columns, setColumns, job }) {
                           {...provided.dragHandleProps}
                           className={`${styles.card} ${snapshot.isDragging ? styles.dragging : ''}`}
                         >
-                          <h4 className={styles.cardTitle}>{item.company_name} - {item.job_title}</h4>
-                          <p className={styles.jobDescription}>{item.job_description}</p>
+                          <h4 className={styles.cardTitle}>{item.companyName} - {item.jobTitle}</h4>
+                          <p className={styles.jobDescription}>{item.jobDescription}</p>
                           <div><strong>Notes:</strong> {item.notes.map(note => <p key={note._id}>{note.content}</p>)}</div>
-                          <p className={styles.dateText}><strong>Created At:</strong> {new Date(item.created_at).toLocaleDateString()}</p>
-                          <p className={styles.dateText}><strong>Updated At:</strong> {new Date(item.updated_at).toLocaleDateString()}</p>
+                          <p className={styles.dateText}><strong>Created At:</strong> {new Date(item.createdAt).toLocaleDateString()}</p>
+                          <p className={styles.dateText}><strong>Updated At:</strong> {new Date(item.updatedAt).toLocaleDateString()}</p>
                         </div>
                       )}
                     </Draggable>

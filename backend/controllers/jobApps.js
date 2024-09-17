@@ -13,6 +13,7 @@ module.exports = {
   create,
   // update,
   // createComment,
+  updateStatus
 };
 
 async function create(req, res) {
@@ -32,6 +33,19 @@ async function index(req, res) {
   try {
     const jobApps = await JobApp.find({ user: req.user._id });
     res.json(jobApps);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch job applications' });
+  }
+}
+
+async function updateStatus(req, res) {
+  try {
+    const updatedJob = await JobApp.findByIdAndUpdate(
+      req.params.id,
+      { status: req.body.status },
+      { new: true }
+    );
+    res.json(updatedJob);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch job applications' });
   }
