@@ -38,14 +38,6 @@ export default function JobBoardPage({ columns, setColumns, job }) {
   }, [localColumns, setColumns]);
 
   useEffect(() => {
-    localStorage.setItem('columns', JSON.stringify(localColumns));
-  }, [localColumns]);
-
-  useEffect(() => {
-    setLocalColumns(columns);
-  }, [columns]);
-
-  useEffect(() => {
     if (job) {
       const updatedColumns = { ...localColumns };
       const status = job.status;
@@ -58,45 +50,33 @@ export default function JobBoardPage({ columns, setColumns, job }) {
     }
   }, [job, localColumns, setColumns]);
   
-
   const onDragEnd = async (result) => {
     const { source, destination } = result;
     if (!destination) return;
     if (source.droppableId === destination.droppableId && source.index === destination.index) return;
-
-    const sourceColumn = localColumns[source.droppableId];
-    const destColumn = localColumns[destination.droppableId];
-    const sourceItems = [...sourceColumn.items];
-    const destItems = [...destColumn.items];
-    const [removed] = sourceItems.splice(source.index, 1);
-    if (source.droppableId === destination.droppableId) { 
-      const save = destItems[destination.index];
-      destItems[destination.index] = removed;
-      destItems[source.index] = save;
+  
+    const updatedColumns = JSON.parse(JSON.stringify(localColumns));
+    const sourceColumn = updatedColumns[source.droppableId];
+    const destColumn = updatedColumns[destination.droppableId];
+  
+    const [movedItem] = sourceColumn.items.splice(source.index, 1);
+  
+    if (source.droppableId === destination.droppableId) {
+      sourceColumn.items.splice(destination.index, 0, movedItem);
     } else {
-      destItems.splice(destination.index, 0, removed);
-      const newStatus = destColumn.name.toLowerCase();
-      await jobAppService.updateJobStatus(removed._id, newStatus);
-      removed.status = newStatus;
+      destColumn.items.splice(destination.index, 0, movedItem);
+      movedItem.status = destination.droppableId.toLowerCase();
+      await jobAppService.updateJobStatus(movedItem._id, movedItem.status);
     }
-
-    const updatedColumns = {
-      ...localColumns,
-      [source.droppableId]: {
-        ...sourceColumn,
-        items: sourceItems
-      },
-      [destination.droppableId]: {
-        ...destColumn,
-        items: destItems
-      }
-    };
-
+  
     setLocalColumns(updatedColumns);
     setColumns(updatedColumns);
   };
+  
 
   return (
+    <>
+    <h1>Job Board</h1>
     <div className={styles.board}>
       <DragDropContext onDragEnd={onDragEnd}>
         {Object.entries(localColumns).map(([columnId, column]) => (
@@ -120,7 +100,7 @@ export default function JobBoardPage({ columns, setColumns, job }) {
                         >
                           <h4 className={styles.cardTitle}>{item.companyName} - {item.jobTitle}</h4>
                           <p className={styles.jobDescription}>{item.jobDescription}</p>
-                          <div><strong>Notes:</strong> {item.notes.map(note => <p key={note._id}>{note.content}</p>)}</div>
+                          <div><strong>Notes</strong> {item.notes.map(note => <p key={note._id}>{note.content}</p>)}</div>
                           <p className={styles.dateText}><strong>Created At:</strong> {new Date(item.createdAt).toLocaleDateString()}</p>
                           <p className={styles.dateText}><strong>Updated At:</strong> {new Date(item.updatedAt).toLocaleDateString()}</p>
                         </div>
@@ -135,5 +115,6 @@ export default function JobBoardPage({ columns, setColumns, job }) {
         ))}
       </DragDropContext>
     </div>
+    </>
   );
 }

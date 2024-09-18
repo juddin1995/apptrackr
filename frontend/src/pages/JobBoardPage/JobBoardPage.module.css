@@ -10,7 +10,7 @@
   border-radius: 8px;
   margin: 0 0.5rem;
   padding: 1rem;
-  min-width: 29vmin;
+  min-width: 35vmin;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
@@ -46,4 +46,10 @@
 .dateText {
   font-size: 0.8rem;
   color: #b0b0b0;
+}
+
+h1 {
+  font-family: "CrawModern";
+  font-size: 3rem;
+  text-transform: uppercase;
 }

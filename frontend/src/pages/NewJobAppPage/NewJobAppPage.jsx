@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import styles from './NewJobApp.module.css';
+import { useNavigate } from 'react-router-dom';
 import { createJobApp } from '../../services/jobAppService';
+import styles from './NewJobApp.module.css';
 
 export default function NewJobApp({ setColumns }) {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     companyName: '',
     jobTitle: '',
@@ -22,7 +24,6 @@ export default function NewJobApp({ setColumns }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Use the createJobApp function from jobAppService
       const newJobApp = await createJobApp(formData);
       setFormData({
         companyName: '',
@@ -31,11 +32,11 @@ export default function NewJobApp({ setColumns }) {
         status: 'wishlist',
         notes: ''
       });
-      // Update the job board with the new job application
       setColumns((prevColumns) => {
         const updatedColumn = { ...prevColumns[newJobApp.status], items: [...prevColumns[newJobApp.status].items, newJobApp] };
         return { ...prevColumns, [newJobApp.status]: updatedColumn };
       });
+      navigate('/board');
     } catch (error) {
       console.error('Failed to create job application:', error);
     }

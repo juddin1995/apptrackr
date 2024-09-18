@@ -11,7 +11,7 @@ export default function HomePage({ user }) {
           <p className={styles.heroText}>
             Organize and manage your job applications with cutting-edge KanBan technology. Stay ahead with AppTrackr.
           </p>
-          <img className={styles.heroImage} src="/path/to/your-image.jpg" alt="AppTrackr Hero" />
+          <img className={styles.heroImage} src="/images/Hero.PNG" alt="AppTrackr Hero" />
           {user ? (
             <div className={styles.buttonGroup}>
               <Link to='/board' className={styles.ctaButton}>Go to Job Board</Link>
