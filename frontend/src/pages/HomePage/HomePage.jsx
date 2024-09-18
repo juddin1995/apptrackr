@@ -42,8 +42,8 @@ export default function HomePage({ user }) {
             <p>Keep detailed and actionable notes for each application to enhance your search.</p>
           </div>
           <div className={styles.featureItem}>
-            <h3>Customizable Workflow</h3>
-            <p>Adapt the board to your unique job search process with advanced customization options.</p>
+            <h3>Prioritize Job Search</h3>
+            <p>Rearrange the order of your job applications by dragging and dropping cards within the column to prioritize your job search.</p>
           </div>
         </div>
       </section>

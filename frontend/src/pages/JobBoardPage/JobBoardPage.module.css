@@ -3,6 +3,9 @@
   overflow-x: auto;
   background: #000;
   padding: 1rem;
+  max-width: 100%;
+  /* width: max-content; */
+  /* white-space: nowrap; */
 }
 
 .column {

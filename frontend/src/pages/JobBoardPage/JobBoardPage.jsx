@@ -73,7 +73,6 @@ export default function JobBoardPage({ columns, setColumns, job }) {
     setColumns(updatedColumns);
   };
   
-
   return (
     <>
     <h1>Job Board</h1>

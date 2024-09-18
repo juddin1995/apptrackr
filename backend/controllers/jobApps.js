@@ -1,7 +1,5 @@
 const express = require('express');
-const verifyToken = require('../middleware/checkToken');
 const JobApp = require('../models/jobApplication');
-const router = express.Router();
 
 // ========== Public Routes ===========
 
