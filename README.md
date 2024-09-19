@@ -55,7 +55,7 @@ AppTrackr is a job application tracking tool built with the MERN stack (MongoDB,
 
 # Screenshot
 
-![Imgur](https://i.imgur.com/AfVj5eO.png)
+![Imgur](https://i.imgur.com/LhKJSRs.png)
 
 
 # Getting Started

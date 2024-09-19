@@ -2,15 +2,17 @@
   display: flex;
   overflow-x: auto;
   padding: 1rem;
-  max-width: 75%;
+  max-width: 100%;
 }
 
 .column {
   border-radius: 8px;
   margin: 0 0.5rem;
   padding: 1rem;
-  min-width: 20vmin;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  width: 25rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .columnTitle {
@@ -106,8 +108,3 @@ h1 {
 .confirmationButton.cancel:hover {
   color: #1a1aff;
 }
-
-
-
-
-
