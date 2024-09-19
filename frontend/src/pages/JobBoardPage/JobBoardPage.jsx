@@ -4,7 +4,7 @@ import { FaTrash } from "react-icons/fa";
 import styles from "./JobBoardPage.module.css";
 import * as jobAppService from "../../services/jobAppService";
 
-export default function JobBoardPage({ columns, setColumns, job }) {
+export default function JobBoardPage({ columns, setColumns }) {
   const [localColumns, setLocalColumns] = useState(columns);
   const [deleteItemConfirmation, setDeleteItemConfirmation] = useState(null);
   const hasFetchedData = useRef(false);
