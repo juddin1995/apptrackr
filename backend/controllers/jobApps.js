@@ -7,12 +7,19 @@ const JobApp = require('../models/jobApplication');
 
 module.exports = {
   index,
-  // show,
   create,
-  // update,
-  // createComment,
+  delete: deleteJobApp,
   updateStatus
 };
+
+async function index(req, res) {
+  try {
+    const jobApps = await JobApp.find({ user: req.user._id });
+    res.json(jobApps);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch job applications' });
+  }
+}
 
 async function create(req, res) {
   try {
@@ -27,12 +34,13 @@ async function create(req, res) {
   }
 }
 
-async function index(req, res) {
+async function deleteJobApp(req, res) {
   try {
-    const jobApps = await JobApp.find({ user: req.user._id });
-    res.json(jobApps);
+    const jobAppId = req.params.id;
+    await JobApp.findByIdAndDelete(jobAppId);
+    res.json({ message: 'Job application deleted successfully' });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch job applications' });
+    res.status(500).json({ error: 'Failed to delete job application' });
   }
 }
 

@@ -23,12 +23,8 @@ function App() {
   const [job, setJob] = useState(null);
 
   const handleNewJob = (job) => {
-    setNewJob(job);
+    setJob(job);
   };
-
-  useEffect(() => {
-    localStorage.setItem('columns', JSON.stringify(columns));
-  }, [columns]);
 
   return (
     <main id="react-app">
@@ -38,7 +34,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage user={user} />} />
             <Route path="/board" element={<JobBoardPage columns={columns} setColumns={setColumns} job={job} />} />
-            <Route path="/board/new" element={<NewJobAppPage onJobSubmit={handleNewJob} />} />
+            <Route path="/board/new" element={<NewJobAppPage onJobSubmit={handleNewJob} setColumns={setColumns} />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         ) : (
