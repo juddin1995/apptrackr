@@ -1,19 +1,15 @@
 .board {
   display: flex;
   overflow-x: auto;
-  background: #000;
   padding: 1rem;
-  max-width: 100%;
-  /* width: max-content; */
-  /* white-space: nowrap; */
+  max-width: 75%;
 }
 
 .column {
-  background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
   border-radius: 8px;
   margin: 0 0.5rem;
   padding: 1rem;
-  min-width: 35vmin;
+  min-width: 20vmin;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
