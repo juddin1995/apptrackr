@@ -1,5 +1,6 @@
 # Credits:
-Drag and Drop feature from [React Beautiful DnD Library](https://www.npmjs.com/package/react-beautiful-dnd)
+- Drag and Drop feature from [React Beautiful DnD Library](https://www.npmjs.com/package/react-beautiful-dnd)
+- Kanban Board Favicon from [FlatIcon](https://www.flaticon.com/free-icons/)
 
 # AppTrackr
 AppTrackr is a job application tracking tool built with the MERN stack (MongoDB, Express, React, and Node.js) that helps users manage and organize their job search process efficiently. The app uses a Kanban board interface to track the progress of job applications through various stages of the job hunt, such as:
