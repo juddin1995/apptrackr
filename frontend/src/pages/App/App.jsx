@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { getUser } from '../../services/authService';
-import './App.css';
 import NavBar from '../../components/NavBar/NavBar';
 import HomePage from '../HomePage/HomePage';
 import JobBoardPage from '../JobBoardPage/JobBoardPage';
 import NewJobAppPage from '../NewJobAppPage/NewJobAppPage';
 import SignUpPage from '../SignUpPage/SignUpPage';
 import LogInPage from '../LogInPage/LogInPage';
+import './App.css';
 
 function App() {
   const [user, setUser] = useState(getUser());

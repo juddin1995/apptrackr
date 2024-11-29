@@ -1,9 +1,16 @@
-.board {
+.boardContainer {
   display: flex;
-  overflow-x: auto;
-  padding: 1rem;
-  max-width: 100%;
+  flex-wrap: wrap;
+  gap: 16px;
 }
+
+.column {
+  flex: 1;
+  min-width: 250px; /* Adjust as needed */
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 
 .column {
   border-radius: 8px;
@@ -107,4 +114,10 @@ h1 {
 
 .confirmationButton.cancel:hover {
   color: #1a1aff;
+}
+
+@media (max-width: 768px) {
+  .column {
+    min-width: 100%;
+  }
 }

@@ -85,7 +85,7 @@ export default function JobBoardPage({ columns, setColumns }) {
   return (
     <>
       <h1>Job Board</h1>
-      <div className={styles.board}>
+      <div className={styles.boardContainer}>
         <DragDropContext onDragEnd={onDragEnd}>
           {Object.entries(localColumns).map(([columnId, column]) => (
             <Droppable key={columnId} droppableId={columnId}>
